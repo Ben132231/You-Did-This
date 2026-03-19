@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://bpfwvmn2fqef8"]
+
+[ext_resource type="PackedScene" uid="uid://ca53qo30iraw0" path="res://Objects/Player.tscn" id="1_dcpal"]
+[ext_resource type="PackedScene" uid="uid://b6b5abeicd3cl" path="res://Models/Whiteboard.gltf" id="2_fh84s"]
+[ext_resource type="Texture2D" uid="uid://c5wdrwu0x1v3e" path="res://Textures/YouDidThis_Face_Tex.png" id="3_4jcv8"]
+[ext_resource type="Texture2D" uid="uid://dl5vd2of6xnm4" path="res://Textures/YouDidThis_Text_Tex.png" id="4_hjacj"]
+[ext_resource type="Texture2D" uid="uid://dcudu55w5sw1a" path="res://Textures/YouDidThis_Ref.jpg" id="5_54217"]
+[ext_resource type="Script" uid="uid://b421xmdkuicpa" path="res://Scripts/Credits.gd" id="5_dcpal"]
+[ext_resource type="AudioStream" uid="uid://daqhwrvg5xx82" path="res://Audios/Wind.ogg" id="5_hjacj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fic7t"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_w4c1a"]
+sky_material = SubResource("ProceduralSkyMaterial_fic7t")
+
+[sub_resource type="Environment" id="Environment_fh84s"]
+background_mode = 2
+sky = SubResource("Sky_w4c1a")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fic7t"]
+albedo_color = Color(0.196479, 0.196479, 0.196479, 1)
+metallic_specular = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fic7t"]
+material = SubResource("StandardMaterial3D_fic7t")
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fic7t"]
+size = Vector3(10, 0, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w4c1a"]
+albedo_color = Color(0.0984528, 0.0984529, 0.0984529, 1)
+metallic_specular = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w4c1a"]
+material = SubResource("StandardMaterial3D_w4c1a")
+size = Vector2(4, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w4c1a"]
+size = Vector3(0, 4, 10)
+
+[node name="YouDidThis" type="Node3D" unique_id=1161873458]
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="." unique_id=1258446260]
+transform = Transform3D(-0.642788, -0.541675, 0.541675, 0, 0.707107, 0.707107, -0.766044, 0.45452, -0.45452, 0, 5, 0)
+light_energy = 0.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=185851435]
+environment = SubResource("Environment_fh84s")
+
+[node name="Player" parent="." unique_id=1231360983 instance=ExtResource("1_dcpal")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Enviorment" type="Node3D" parent="." unique_id=357227009]
+
+[node name="Floor" type="Node3D" parent="Enviorment" unique_id=631648100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Enviorment/Floor" unique_id=49586251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+mesh = SubResource("PlaneMesh_fic7t")
+
+[node name="StaticBody" type="StaticBody3D" parent="Enviorment/Floor" unique_id=407662708]
+
+[node name="Collision" type="CollisionShape3D" parent="Enviorment/Floor/StaticBody" unique_id=209894395]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+shape = SubResource("BoxShape3D_fic7t")
+
+[node name="Walls" type="Node3D" parent="Enviorment" unique_id=765589633]
+
+[node name="Wall_1" type="Node3D" parent="Enviorment/Walls" unique_id=311806657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Enviorment/Walls/Wall_1" unique_id=1242995297]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 2, 5)
+mesh = SubResource("PlaneMesh_w4c1a")
+
+[node name="StaticBody" type="StaticBody3D" parent="Enviorment/Walls/Wall_1" unique_id=204965613]
+
+[node name="Collision" type="CollisionShape3D" parent="Enviorment/Walls/Wall_1/StaticBody" unique_id=2121988813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000499725, 2, 5)
+shape = SubResource("BoxShape3D_w4c1a")
+
+[node name="Wall_2" type="Node3D" parent="Enviorment/Walls" unique_id=295860382]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Enviorment/Walls/Wall_2" unique_id=1953629852]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 2, 5)
+mesh = SubResource("PlaneMesh_w4c1a")
+
+[node name="StaticBody" type="StaticBody3D" parent="Enviorment/Walls/Wall_2" unique_id=294133254]
+
+[node name="Collision" type="CollisionShape3D" parent="Enviorment/Walls/Wall_2/StaticBody" unique_id=456794973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000499725, 2, 5)
+shape = SubResource("BoxShape3D_w4c1a")
+
+[node name="Wall_3" type="Node3D" parent="Enviorment/Walls" unique_id=863805799]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5, 0, 9)
+
+[node name="Mesh" type="MeshInstance3D" parent="Enviorment/Walls/Wall_3" unique_id=1426143483]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 2, 5)
+mesh = SubResource("PlaneMesh_w4c1a")
+
+[node name="StaticBody" type="StaticBody3D" parent="Enviorment/Walls/Wall_3" unique_id=694820730]
+
+[node name="Collision" type="CollisionShape3D" parent="Enviorment/Walls/Wall_3/StaticBody" unique_id=107329912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000499725, 2, 5)
+shape = SubResource("BoxShape3D_w4c1a")
+
+[node name="Wall_4" type="Node3D" parent="Enviorment/Walls" unique_id=51291433]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5, 0, 9)
+
+[node name="Mesh" type="MeshInstance3D" parent="Enviorment/Walls/Wall_4" unique_id=603618598]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 2, 5)
+mesh = SubResource("PlaneMesh_w4c1a")
+
+[node name="StaticBody" type="StaticBody3D" parent="Enviorment/Walls/Wall_4" unique_id=494916091]
+
+[node name="Collision" type="CollisionShape3D" parent="Enviorment/Walls/Wall_4/StaticBody" unique_id=223866708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000499725, 2, 5)
+shape = SubResource("BoxShape3D_w4c1a")
+
+[node name="Roof" type="Node3D" parent="Enviorment" unique_id=800573703]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 5, 4, -1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Enviorment/Roof" unique_id=365719883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+mesh = SubResource("PlaneMesh_fic7t")
+
+[node name="StaticBody" type="StaticBody3D" parent="Enviorment/Roof" unique_id=1685307238]
+
+[node name="Collision" type="CollisionShape3D" parent="Enviorment/Roof/StaticBody" unique_id=1859277935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+shape = SubResource("BoxShape3D_fic7t")
+
+[node name="Lighting" type="Node3D" parent="Enviorment" unique_id=752506372]
+
+[node name="OmniLight_1" type="OmniLight3D" parent="Enviorment/Lighting" unique_id=2130674853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+light_color = Color(1, 0, 0, 1)
+
+[node name="OmniLight_2" type="OmniLight3D" parent="Enviorment/Lighting" unique_id=1940248972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0)
+light_color = Color(1, 0, 0, 1)
+
+[node name="OmniLight_3" type="OmniLight3D" parent="Enviorment/Lighting" unique_id=534422613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 8)
+light_color = Color(1, 0, 0, 1)
+
+[node name="OmniLight_4" type="OmniLight3D" parent="Enviorment/Lighting" unique_id=1611116549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 8)
+light_color = Color(1, 0, 0, 1)
+
+[node name="OmniLight_5" type="OmniLight3D" parent="Enviorment/Lighting" unique_id=38671736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+light_color = Color(1, 0, 0, 1)
+omni_range = 8.0
+
+[node name="Whiteboard" parent="Enviorment" unique_id=1915343822 instance=ExtResource("2_fh84s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 8)
+
+[node name="YouDidThis_Face" type="Sprite3D" parent="Enviorment" unique_id=598171235]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 2.11201, 7.9)
+flip_h = true
+texture = ExtResource("3_4jcv8")
+
+[node name="YouDidThis_Text" type="Sprite3D" parent="Enviorment" unique_id=500814936]
+transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 1.48464, 7.9)
+flip_h = true
+texture = ExtResource("4_hjacj")
+
+[node name="Credits" type="Control" parent="." unique_id=1639081]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_dcpal")
+
+[node name="Image" type="TextureRect" parent="Credits" unique_id=898749782]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 246.0
+offset_top = -328.0
+offset_right = 574.0
+offset_bottom = -82.0
+grow_vertical = 0
+rotation = 1.5708
+texture = ExtResource("5_54217")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits" unique_id=1329119342]
+visible = false
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 184.0
+text = "You Did This
+by Ben132231
+
+
+
+
+The drawing that started this
+Jan 13 25 - May 22 25    It got erased o7"
+scroll_active = false
+
+[node name="Wind" type="AudioStreamPlayer" parent="." unique_id=1295966936]
+stream = ExtResource("5_hjacj")
+autoplay = true
+parameters/looping = true
